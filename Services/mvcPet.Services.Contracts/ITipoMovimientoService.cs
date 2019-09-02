@@ -9,18 +9,18 @@ using mvcPet.Entities;
 namespace mvcPet.Services.Contracts
 {
     [ServiceContract]
-    public interface ISalaService
+    public interface ITipoMovimientoService
     {
         [OperationContract]
-        Sala Agregar(Sala sala);
+        TipoMovimiento Agregar(TipoMovimiento tipoMovimiento);
 
         [OperationContract]
-        Sala Editar(Sala sala);
+        TipoMovimiento Editar(TipoMovimiento tipoMovimiento);
 
         [OperationContract]
-        Sala BuscarPorId(int id);
+        TipoMovimiento BuscarPorId(int id);
 
         [OperationContract]
-        List<Sala> ListarTodos();
+        List<TipoMovimiento> ListarTodos();
     }
 }

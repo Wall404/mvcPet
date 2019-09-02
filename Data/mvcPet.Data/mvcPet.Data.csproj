@@ -52,6 +52,7 @@
     <Compile Include="PrecioDAC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalaDAC.cs" />
+    <Compile Include="TipoMovimientoDAC.cs" />
     <Compile Include="TipoServicioDAC.cs" />
   </ItemGroup>
   <ItemGroup>

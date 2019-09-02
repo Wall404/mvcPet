@@ -10,28 +10,27 @@ using mvcPet.Services.Contracts;
 
 namespace mvcPet.Services
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple)]
-    public class SalaService : ISalaService
+    public class TipoMovimientoService : ITipoMovimientoService
     {
-        public Sala Agregar(Sala sala)
+        public TipoMovimiento Agregar(TipoMovimiento tipoMovimiento)
         {
             // TODO: Completar
             throw new NotImplementedException();
         }
 
-        public Sala BuscarPorId(int id)
+        public TipoMovimiento BuscarPorId(int id)
         {
             // TODO: Completar
             throw new NotImplementedException();
         }
 
-        public Sala Editar(Sala sala)
+        public TipoMovimiento Editar(TipoMovimiento tipoMovimiento)
         {
             // TODO: Completar
             throw new NotImplementedException();
         }
 
-        public List<Sala> ListarTodos()
+        public List<TipoMovimiento> ListarTodos()
         {
             // TODO: Completar
             throw new NotImplementedException();
