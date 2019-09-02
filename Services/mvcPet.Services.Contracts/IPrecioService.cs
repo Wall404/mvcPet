@@ -1,0 +1,26 @@
+﻿using mvcPet.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace mvcPet.Services.Contracts
+{
+    [ServiceContract]
+    public interface IPrecioService
+    {
+        [OperationContract]
+        Precio Agregar(Precio precio);
+
+        [OperationContract]
+        Precio Editar(Precio precio);
+
+        [OperationContract]
+        Precio BuscarPorId(int id);
+
+        [OperationContract]
+        List<Precio> ListarTodos();
+    }
+}
