@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
 using mvcPet.Business;
 using mvcPet.Entities;
 using mvcPet.Services.Contracts;
@@ -11,30 +11,30 @@ using mvcPet.Services.Contracts;
 namespace mvcPet.Services
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple)]
-    public class PrecioService : IPrecioService
+    public class SalaService : ISalaService
     {
-        public Precio Agregar(Precio precio)
+        public Sala Agregar(Sala sala)
         {
-            var bc = new PrecioComponent();
-            return bc.Agregar(precio);
-        }
-
-        public Precio BuscarPorTipoServicio(int tipoServicioId)
-        {
-            // TODO
+            // TODO: Completar
             throw new NotImplementedException();
         }
 
-        public Precio Editar(Precio precio)
+        public Sala BuscarPorId(int Id)
         {
-            // TODO
+            // TODO: Completar
             throw new NotImplementedException();
         }
 
-        public List<Precio> ListarTodos()
+        public Sala Editar(Sala sala)
         {
-            var bc = new PrecioComponent();
-            return bc.ListarTodos();
+            // TODO: Completar
+            throw new NotImplementedException();
+        }
+
+        public List<Sala> ListarTodos()
+        {
+            // TODO: Completar
+            throw new NotImplementedException();
         }
     }
 }

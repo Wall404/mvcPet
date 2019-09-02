@@ -9,8 +9,10 @@ namespace mvcPet.Entities
 {
     public partial class Precio : IEntity
     {
+
         [DisplayName("Id")]
         public int Id { get; set; }
+
 
 
         [DisplayName("Fecha Desde")]
@@ -21,5 +23,8 @@ namespace mvcPet.Entities
 
         [DisplayName("Valor")]
         public double Valor { get; set; }
+
+        public IList<TipoServicio> TipoServicios { get; set; }
+
     }
 }

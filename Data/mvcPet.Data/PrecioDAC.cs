@@ -12,9 +12,19 @@ namespace mvcPet.Data
 {
     public partial class PrecioDAC : DataAccessComponent, IRepository<Precio>
     {
-        public Precio Create(Precio entity)
+        public Precio Create(Precio precio)
         {
-            throw new NotImplementedException();
+            const string SQL_STATEMENT = "INSERT INTO Precio ([TipoServicioId],[FechaDesde],[FechaHasta],[Valor]) VALUES (<@TipoServicioId, int,>,<@FechaDesde, date,>,<@FechaHasta, date,>,<@Valor, decimal(10,2),>);";
+
+            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            {
+                db.AddInParameter(cmd, "@TipoServicioId", DbType.Int32, precio.Id);
+                db.AddInParameter(cmd, "@FechaDesde", DbType.DateTime2, precio.FechaDesde);
+                db.AddInParameter(cmd, "@FechaHasta", DbType.DateTime2, precio.FechaHasta);
+                precio.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
+            }
+            return precio;
         }
 
         public void Delete(int id)
@@ -24,7 +34,22 @@ namespace mvcPet.Data
 
         public List<Precio> Read()
         {
-            throw new NotImplementedException();
+            const string SQL_STATEMENT = "SELECT [TipoServicioId],[FechaDesde],[FechaHasta],[Valor] FROM Precio";
+
+            List<Precio> result = new List<Precio>();
+            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            {
+                using (IDataReader dr = db.ExecuteReader(cmd))
+                {
+                    while (dr.Read())
+                    {
+                        Precio precio = LoadPrecio(dr);
+                        result.Add(precio);
+                    }
+                }
+            }
+            return result;
         }
 
         public Precio ReadBy(int id)
@@ -35,6 +60,16 @@ namespace mvcPet.Data
         public void Update(Precio entity)
         {
             throw new NotImplementedException();
+        }
+
+        private Precio LoadPrecio(IDataReader dr)
+        {
+            Precio precio = new Precio();
+            precio.Id = GetDataValue<int>(dr, "TipoServicioId");
+            precio.FechaDesde = GetDataValue<DateTime>(dr, "FechaDesde");
+            precio.FechaDesde = GetDataValue<DateTime>(dr, "FechaDesde");
+            precio.Valor = GetDataValue<double>(dr, "Valor");
+            return precio;
         }
     }
 }

@@ -166,6 +166,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PrecioController.cs" />
+    <Compile Include="Controllers\SalaController.cs" />
     <Compile Include="Controllers\TipoServicioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -286,10 +287,12 @@
     <Content Include="Views\TipoServicio\Index.cshtml" />
     <Content Include="Views\TipoServicio\Create.cshtml" />
     <Content Include="Views\TipoServicio\Edit.cshtml" />
+    <Content Include="Views\Precio\Index.cshtml" />
+    <Content Include="Views\Precio\Create.cshtml" />
+    <Content Include="Views\Sala\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Precio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

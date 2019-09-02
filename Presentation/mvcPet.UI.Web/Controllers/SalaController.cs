@@ -1,5 +1,4 @@
-﻿using mvcPet.Entities;
-using mvcPet.Services;
+﻿using mvcPet.Services;
 using mvcPet.Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -9,40 +8,36 @@ using System.Web.Mvc;
 
 namespace mvcPet.UI.Web.Controllers
 {
-    public class PrecioController : Controller
+    public class SalaController : Controller
     {
-        // GET: Precio
+        // GET: Sala
         public ActionResult Index()
         {
-            IPrecioService precioService = new PrecioService();
-            var lista = precioService.ListarTodos();
-
-            return View(lista);
+            ISalaService salaService = new SalaService();
+            var lista = salaService.ListarTodos();
+            return View();
         }
 
-        // GET: Precio/Details/5
+        // GET: Sala/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Precio/Create
+        // GET: Sala/Create
         public ActionResult Create()
         {
-            var precio = new Precio();
-            ITipoServicioService tipoServicioService = new TipoServicioService();
-            precio.TipoServicios = tipoServicioService.ListarTodos();
-            return View(precio);
+            return View();
         }
 
-        // POST: Precio/Create
+        // POST: Sala/Create
         [HttpPost]
-        public ActionResult Create(Precio model)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
-                IPrecioService precioService = new PrecioService();
-                precioService.Agregar(model);
+                // TODO: Add insert logic here
+
                 return RedirectToAction("Index");
             }
             catch
@@ -51,13 +46,13 @@ namespace mvcPet.UI.Web.Controllers
             }
         }
 
-        // GET: Precio/Edit/5
+        // GET: Sala/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Precio/Edit/5
+        // POST: Sala/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -73,13 +68,13 @@ namespace mvcPet.UI.Web.Controllers
             }
         }
 
-        // GET: Precio/Delete/5
+        // GET: Sala/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Precio/Delete/5
+        // POST: Sala/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
