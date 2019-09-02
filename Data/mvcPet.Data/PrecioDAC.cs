@@ -20,8 +20,8 @@ namespace mvcPet.Data
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
             {
                 db.AddInParameter(cmd, "@TipoServicioId", DbType.Int32, precio.Id);
-                db.AddInParameter(cmd, "@FechaDesde", DbType.DateTime2, precio.FechaDesde);
-                db.AddInParameter(cmd, "@FechaHasta", DbType.DateTime2, precio.FechaHasta);
+                db.AddInParameter(cmd, "@FechaDesde", DbType.Date, precio.FechaDesde);
+                db.AddInParameter(cmd, "@FechaHasta", DbType.Date, precio.FechaHasta);
                 precio.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
             }
             return precio;
@@ -66,9 +66,9 @@ namespace mvcPet.Data
         {
             Precio precio = new Precio();
             precio.Id = GetDataValue<int>(dr, "TipoServicioId");
-            precio.FechaDesde = GetDataValue<DateTime>(dr, "FechaDesde");
-            precio.FechaDesde = GetDataValue<DateTime>(dr, "FechaDesde");
-            precio.Valor = GetDataValue<double>(dr, "Valor");
+            precio.FechaDesde = GetDateTimeValue(dr, "FechaDesde");
+            precio.FechaHasta = GetDateTimeValue(dr, "FechaHasta");
+            precio.Valor = GetDataValue<decimal>(dr, "Valor");
             return precio;
         }
     }

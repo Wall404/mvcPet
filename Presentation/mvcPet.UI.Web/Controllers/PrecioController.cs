@@ -31,7 +31,10 @@ namespace mvcPet.UI.Web.Controllers
         {
             var precio = new Precio();
             ITipoServicioService tipoServicioService = new TipoServicioService();
-            precio.TipoServicios = tipoServicioService.ListarTodos();
+            foreach (var item in tipoServicioService.ListarTodos())
+            {
+                precio.TipoServicios.Add(item) ;
+            }
             return View(precio);
         }
 

@@ -9,6 +9,10 @@ namespace mvcPet.Entities
 {
     public partial class Precio : IEntity
     {
+        public Precio()
+        {
+            TipoServicios = new List<TipoServicio>();
+        }
 
         [DisplayName("Id")]
         public int Id { get; set; }
@@ -22,7 +26,7 @@ namespace mvcPet.Entities
         public DateTime FechaHasta { get; set; }
 
         [DisplayName("Valor")]
-        public double Valor { get; set; }
+        public decimal Valor { get; set; }
 
         public IList<TipoServicio> TipoServicios { get; set; }
 
