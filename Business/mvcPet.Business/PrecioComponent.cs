@@ -25,11 +25,19 @@ namespace mvcPet.Business
             result = precio;
             return result;
         }
-        public Precio BuscarPorTipoServicio(int tipoServicioId)
+        public Precio BuscarPorId(int id)
         {
             Precio result = default(Precio);
             var precioDAC = new PrecioDAC();
-            result = precioDAC.ReadBy(tipoServicioId);
+            result = precioDAC.ReadBy(id);
+            return result;
+        }
+
+        public List<Precio> BuscarPorTipoServicio(int tipoServicioId)
+        {
+            List<Precio> result = default(List<Precio>);
+            var precioDAC = new PrecioDAC();
+            result = precioDAC.ReadByTipoServicioId(tipoServicioId);
             return result;
         }
         public List<Precio> ListarTodos()

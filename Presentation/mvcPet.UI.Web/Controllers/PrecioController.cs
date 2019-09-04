@@ -20,6 +20,18 @@ namespace mvcPet.UI.Web.Controllers
             return View(lista);
         }
 
+        // GET: Precio
+        public ActionResult IndexByService(int id)
+        {
+
+            ViewBag.IdTipoServicio = id;
+
+            IPrecioService precioService = new PrecioService();
+            var lista = precioService.BuscarPorTipoServicio(id);
+
+            return View(lista);
+        }
+
         // GET: Precio/Details/5
         public ActionResult Details(int id)
         {
@@ -29,13 +41,8 @@ namespace mvcPet.UI.Web.Controllers
         // GET: Precio/Create
         public ActionResult Create()
         {
-            var precio = new Precio();
-            ITipoServicioService tipoServicioService = new TipoServicioService();
-            foreach (var item in tipoServicioService.ListarTodos())
-            {
-                precio.TipoServicios.Add(item) ;
-            }
-            return View(precio);
+
+            return View();
         }
 
         // POST: Precio/Create

@@ -292,6 +292,9 @@
     <Content Include="Views\Precio\Create.cshtml" />
     <Content Include="Views\Sala\Index.cshtml" />
     <Content Include="Views\TipoMovimiento\Index.cshtml" />
+    <Content Include="Views\Precio\IndexByService.cshtml" />
+    <Content Include="Views\TipoServicio\ListaPrecios.cshtml" />
+    <Content Include="Views\TipoServicio\NuevoPrecio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

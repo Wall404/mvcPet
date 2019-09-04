@@ -14,17 +14,27 @@ namespace mvcPet.Data
     {
         public Precio Create(Precio precio)
         {
-            const string SQL_STATEMENT = "INSERT INTO Precio ([TipoServicioId],[FechaDesde],[FechaHasta],[Valor]) VALUES (<@TipoServicioId, int,>,<@FechaDesde, date,>,<@FechaHasta, date,>,<@Valor, decimal(10,2),>);";
-
-            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
-            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            try
             {
-                db.AddInParameter(cmd, "@TipoServicioId", DbType.Int32, precio.Id);
-                db.AddInParameter(cmd, "@FechaDesde", DbType.Date, precio.FechaDesde);
-                db.AddInParameter(cmd, "@FechaHasta", DbType.Date, precio.FechaHasta);
-                precio.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
+                const string SQL_STATEMENT = "INSERT INTO Precio ([TipoServicioId],[FechaDesde],[FechaHasta],[Valor]) VALUES (@TipoServicioId, @FechaDesde, @FechaHasta, @Valor ); SELECT SCOPE_IDENTITY();";
+
+                var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+                using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+                {
+                    db.AddInParameter(cmd, "@TipoServicioId", DbType.Int32, precio.TipoServicioId);
+                    db.AddInParameter(cmd, "@FechaDesde", DbType.Date, precio.FechaDesde);
+                    db.AddInParameter(cmd, "@FechaHasta", DbType.Date, precio.FechaHasta);
+                    db.AddInParameter(cmd, "@Valor", DbType.Decimal, precio.Valor);
+                    precio.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
+                }
+                return precio;
             }
-            return precio;
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            
         }
 
         public void Delete(int id)
@@ -34,7 +44,7 @@ namespace mvcPet.Data
 
         public List<Precio> Read()
         {
-            const string SQL_STATEMENT = "SELECT [TipoServicioId],[FechaDesde],[FechaHasta],[Valor] FROM Precio";
+            const string SQL_STATEMENT = "SELECT [Id],[TipoServicioId],[FechaDesde],[FechaHasta],[Valor] FROM Precio";
 
             List<Precio> result = new List<Precio>();
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
@@ -54,7 +64,44 @@ namespace mvcPet.Data
 
         public Precio ReadBy(int id)
         {
-            throw new NotImplementedException();
+            const string SQL_STATEMENT = "SELECT [Id],[TipoServicioId],[FechaDesde],[FechaHasta],[Valor] FROM Precio WHERE [Id]=@Id ";
+            Precio precio = null;
+
+            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            {
+                db.AddInParameter(cmd, "@Id", DbType.Int32, id);
+                using (IDataReader dr = db.ExecuteReader(cmd))
+                {
+                    if (dr.Read())
+                    {
+                        precio = LoadPrecio(dr);
+                    }
+                }
+            }
+            return precio;
+        }
+
+        public List<Precio> ReadByTipoServicioId(int tipoServicioId)
+        {
+            const string SQL_STATEMENT = "SELECT [Id],[TipoServicioId],[FechaDesde],[FechaHasta],[Valor] FROM Precio WHERE [TipoServicioId]=@TipoServicioId ";
+
+            List<Precio> result = new List<Precio>();
+
+            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            {
+                db.AddInParameter(cmd, "@TipoServicioId", DbType.Int32, tipoServicioId);
+                using (IDataReader dr = db.ExecuteReader(cmd))
+                {
+                    while (dr.Read())
+                    {
+                        Precio precio = LoadPrecio(dr);
+                        result.Add(precio);
+                    }
+                }
+            }
+            return result;
         }
 
         public void Update(Precio entity)
@@ -65,7 +112,8 @@ namespace mvcPet.Data
         private Precio LoadPrecio(IDataReader dr)
         {
             Precio precio = new Precio();
-            precio.Id = GetDataValue<int>(dr, "TipoServicioId");
+            precio.Id = GetDataValue<int>(dr, "Id");
+            precio.TipoServicioId = GetDataValue<int>(dr, "TipoServicioId");
             precio.FechaDesde = GetDateTimeValue(dr, "FechaDesde");
             precio.FechaHasta = GetDateTimeValue(dr, "FechaHasta");
             precio.Valor = GetDataValue<decimal>(dr, "Valor");
