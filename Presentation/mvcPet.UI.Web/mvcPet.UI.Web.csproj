@@ -293,6 +293,8 @@
     <Content Include="Views\TipoServicio\NuevoPrecio.cshtml" />
     <Content Include="Views\Especies\Delete.cshtml" />
     <Content Include="Views\Especies\Details.cshtml" />
+    <Content Include="Views\TipoServicio\Details.cshtml" />
+    <Content Include="Views\TipoServicio\EditarPrecio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
