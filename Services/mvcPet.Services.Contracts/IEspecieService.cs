@@ -16,7 +16,10 @@ namespace mvcPet.Services.Contracts
         Especie Editar(Especie especie);
 
         [OperationContract]
-        Especie BuscarPorId(int Id);
+        Especie Eliminar(int id);
+
+        [OperationContract]
+        Especie BuscarPorId(int id);
 
         [OperationContract]
         List<Especie> ListarTodos();

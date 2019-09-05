@@ -23,7 +23,17 @@ namespace mvcPet.UI.Web.Controllers
         // GET: Especies/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+
+            IEspecieService especieService = new EspecieService();
+            Especie especie = especieService.BuscarPorId(id);
+            if (especie == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(especie);
+            }
         }
 
         // GET: Especies/Create
@@ -38,7 +48,6 @@ namespace mvcPet.UI.Web.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
                 IEspecieService especieService = new EspecieService();
                 especieService.Agregar(model);
                 return RedirectToAction("Index");
@@ -54,12 +63,19 @@ namespace mvcPet.UI.Web.Controllers
         {
             IEspecieService especieService = new EspecieService();
             Especie e = especieService.BuscarPorId(id);
-            return View(e);
+            if (e == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(e);
+            }
         }
 
         // POST: Especies/Edit/5
         [HttpPost]
-        public ActionResult Edit( Especie model)
+        public ActionResult Edit(Especie model)
         {
             try
             {
@@ -76,22 +92,32 @@ namespace mvcPet.UI.Web.Controllers
         // GET: Especies/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            IEspecieService especieService = new EspecieService();
+            Especie e = especieService.BuscarPorId(id);
+            if(e == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(e);
+            }
         }
 
         // POST: Especies/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirm(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                IEspecieService especieService = new EspecieService();
+                especieService.Eliminar(id);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return HttpNotFound();
             }
         }
     }

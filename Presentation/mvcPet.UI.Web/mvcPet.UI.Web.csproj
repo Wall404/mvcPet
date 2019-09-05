@@ -295,6 +295,8 @@
     <Content Include="Views\Precio\IndexByService.cshtml" />
     <Content Include="Views\TipoServicio\ListaPrecios.cshtml" />
     <Content Include="Views\TipoServicio\NuevoPrecio.cshtml" />
+    <Content Include="Views\Especies\Delete.cshtml" />
+    <Content Include="Views\Especies\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

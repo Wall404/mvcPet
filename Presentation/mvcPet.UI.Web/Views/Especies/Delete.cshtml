@@ -1,0 +1,32 @@
+﻿@model mvcPet.Entities.Especie
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+<h3>¿Estás seguro que quieres eliminar @Model.Nombre?</h3>
+<div>
+    <h4>Especie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+            @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-primary"})
+        </div>
+    }
+</div>
