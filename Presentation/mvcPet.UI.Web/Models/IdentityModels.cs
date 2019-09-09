@@ -29,5 +29,7 @@ namespace mvcPet.UI.Web.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<mvcPet.Entities.Sala> Salas { get; set; }
     }
 }

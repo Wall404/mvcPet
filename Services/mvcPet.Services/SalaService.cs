@@ -1,40 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ServiceModel;
+﻿using System.Collections.Generic;
 using mvcPet.Business;
 using mvcPet.Entities;
 using mvcPet.Services.Contracts;
 
-namespace mvcPet.Services
+namespace mvcPet.UI.Web.Controllers
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class SalaService : ISalaService
     {
         public Sala Agregar(Sala sala)
         {
-            // TODO: Completar
-            throw new NotImplementedException();
+            var bc = new SalaComponent();
+            return bc.Agregar(sala);
         }
 
         public Sala BuscarPorId(int id)
         {
-            // TODO: Completar
-            throw new NotImplementedException();
+            var bc = new SalaComponent();
+            return bc.BuscarPorId(id);
         }
 
         public Sala Editar(Sala sala)
         {
-            // TODO: Completar
-            throw new NotImplementedException();
+            var bc = new SalaComponent();
+            return bc.Editar(sala);
         }
 
         public List<Sala> ListarTodos()
         {
-            // TODO: Completar
-            throw new NotImplementedException();
+            var bc = new SalaComponent();
+            return bc.ListarTodos();
+        }
+
+        public Sala Eliminar(int id)
+        {
+            var bc = new SalaComponent();
+            return bc.Eliminar(id);
         }
     }
 }
