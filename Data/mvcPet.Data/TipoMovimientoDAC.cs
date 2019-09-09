@@ -17,7 +17,7 @@ namespace mvcPet.Data
             try
             {
                 // TODO: Completar *************** aca toque GABY------
-                const string SQL_STATEMENT = "INSERT INTO TipoMovimiento ([Nombre]) VALUES(@Nombre,); SELECT SCOPE_IDENTITY();";
+                const string SQL_STATEMENT = "INSERT INTO TipoMovimiento ([Nombre], [Multiplicador]) VALUES(@Nombre,@Multiplicador); SELECT SCOPE_IDENTITY();";
 
                 var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
                 using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
