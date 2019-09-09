@@ -18,12 +18,10 @@ namespace mvcPet.Entities
         public int TipoServicioId { get; set; }
 
         [DisplayName("Fecha Desde")]
-        [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime FechaDesde { get; set; }
 
         [DisplayName("Fecha Hasta")]
-        [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime FechaHasta { get; set; }
 

@@ -75,10 +75,16 @@ namespace mvcPet.UI.Web.Controllers
         }
 
         // GET: TipoServicio/EditarPrecio/5
-        public ActionResult EditarPrecio(int id)
+        public ActionResult EditarPrecio(int? id)
         {
+
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
             IPrecioService precioService = new PrecioService();
-            Precio precio = precioService.BuscarPorId(id);
+            Precio precio = precioService.BuscarPorId(id.Value);
 
             if(precio == null)
             {
