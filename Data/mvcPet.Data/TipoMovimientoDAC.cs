@@ -23,7 +23,7 @@ namespace mvcPet.Data
                 using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
                 {
                     db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, tipoMovimiento.Nombre);
-                    //db.AddInParameter(cmd, "@Multiplicador", DbType.UInt16, tipoMovimiento.Multiplicador);
+                    db.AddInParameter(cmd, "@Multiplicador", DbType.Int16, tipoMovimiento.Multiplicador);
                     tipoMovimiento.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
                 }
                 return tipoMovimiento;
@@ -54,7 +54,7 @@ namespace mvcPet.Data
         public List<TipoMovimiento> Read()
         {
             // TODO: Completar *************** aca toque GABY------
-            const string SQL_STATEMENT = "SELECT [Id], [Nombre] FROM TipoMovimiento ";
+            const string SQL_STATEMENT = "SELECT [Id], [Nombre], [Multiplicador] FROM TipoMovimiento ";
 
             List<TipoMovimiento> result = new List<TipoMovimiento>();
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
@@ -76,7 +76,7 @@ namespace mvcPet.Data
         public TipoMovimiento ReadBy(int id)
         {
             // TODO: Completar *************** aca toque GABY------
-            const string SQL_STATEMENT = "SELECT [Id], [Nombre] FROM TipoMovimiento WHERE [Id]=@Id ";
+            const string SQL_STATEMENT = "SELECT [Id], [Nombre],[Multiplicador] FROM TipoMovimiento WHERE [Id]=@Id ";
             TipoMovimiento tipoMovimiento = null;
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
@@ -98,13 +98,13 @@ namespace mvcPet.Data
         public void Update(TipoMovimiento tipoMovimiento)
         {
             // TODO: Completar *************** aca toque GABY------
-            const string SQL_STATEMENT = "UPDATE TipoMovimiento SET [Nombre]= @Nombre WHERE [Id]= @Id ";
+            const string SQL_STATEMENT = "UPDATE TipoMovimiento SET [Nombre]= @Nombre [Multiplicador]=@Multiplicador WHERE [Id]= @Id ";
 
             var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
             using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
             {
                 db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, tipoMovimiento.Nombre);
-                //db.AddInParameter(cmd, "@Multiplicador", DbType.UInt16, tipoMovimiento.Multiplicador);
+                db.AddInParameter(cmd, "@Multiplicador", DbType.Int16, tipoMovimiento.Multiplicador);
                 db.AddInParameter(cmd, "@Id", DbType.Int32, tipoMovimiento.Id);
                 db.ExecuteNonQuery(cmd);
             }
@@ -116,7 +116,6 @@ namespace mvcPet.Data
             TipoMovimiento tipoMovimiento = new TipoMovimiento();
             tipoMovimiento.Id = GetDataValue<int>(dr, "Id");
             tipoMovimiento.Nombre = GetDataValue<string>(dr, "Nombre");
-            //tipoMovimiento.Multiplicador = GetInt16Value(dr, "Multiplicador");
             tipoMovimiento.Multiplicador = GetInt16Value(dr, "Multiplicador");
 
             return tipoMovimiento;
