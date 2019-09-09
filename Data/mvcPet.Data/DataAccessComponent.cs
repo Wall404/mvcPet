@@ -35,6 +35,16 @@ namespace mvcPet.Data
             else
                 return default(T);
         }
+        // metodo para retornar el contenido de multiplicador 
+        protected static Int16 GetInt16Value(IDataReader dr, string columnName)
+        {
+            int i = dr.GetOrdinal(columnName);
+            
+            if (!dr.IsDBNull(i))
+                return dr.GetInt16(i);
+            else
+                return default(Int16);
+        }
 
         protected string FormatFilterStatement(string filter)
         {

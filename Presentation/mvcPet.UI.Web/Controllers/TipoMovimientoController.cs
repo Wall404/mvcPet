@@ -1,4 +1,5 @@
-﻿using mvcPet.Services;
+﻿using mvcPet.Entities;
+using mvcPet.Services;
 using mvcPet.Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,13 @@ namespace mvcPet.UI.Web.Controllers
 
         // POST: TipoMovimiento/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(TipoMovimiento model)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                // TODO: Add insert logic here *****************aca toque GABY-----
+                ITipoMovimientoService tipoMovimientoService = new TipoMovimientoService();
+                tipoMovimientoService.Agregar(model);
                 return RedirectToAction("Index");
             }
             catch
@@ -47,20 +49,23 @@ namespace mvcPet.UI.Web.Controllers
             }
         }
 
-        // GET: TipoMovimiento/Edit/5
+        // GET: TipoMovimiento/Edit/5 *****************aca toque GABY-----
         public ActionResult Edit(int id)
         {
-            return View();
+            ITipoMovimientoService tipoMovimiento = new TipoMovimientoService();
+            TipoMovimiento t = tipoMovimiento.BuscarPorId(id);
+            return View(t);
         }
 
-        // POST: TipoMovimiento/Edit/5
+        // POST: TipoMovimiento/Edit/5 ***************aca toque GABY
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(TipoMovimiento model)
         {
             try
             {
-                // TODO: Add update logic here
-
+                // TODO: Add update logic here  
+                ITipoMovimientoService tipoMovimientoService = new TipoMovimientoService();
+                tipoMovimientoService.Editar(model);
                 return RedirectToAction("Index");
             }
             catch

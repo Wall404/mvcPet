@@ -10,29 +10,38 @@ using mvcPet.Services.Contracts;
 
 namespace mvcPet.Services
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple)] // TODO: Completar *************esto toque GABY
     public class TipoMovimientoService : ITipoMovimientoService
     {
         public TipoMovimiento Agregar(TipoMovimiento tipoMovimiento)
         {
-            // TODO: Completar
+            // TODO: Completar *************esto toque GABY
+            var bc = new TipoMovimientoComponent();
+            return bc.Agregar(tipoMovimiento);
             throw new NotImplementedException();
         }
 
         public TipoMovimiento BuscarPorId(int id)
         {
-            // TODO: Completar
+            // TODO: Completar *************esto toque GABY
+            var bc = new TipoMovimientoComponent();
+            return bc.BuscarPorId(id);
             throw new NotImplementedException();
         }
 
         public TipoMovimiento Editar(TipoMovimiento tipoMovimiento)
         {
-            // TODO: Completar
+            // TODO: Completar *************esto toque GABY
+            var bc = new TipoMovimientoComponent();
+            return bc.Editar(tipoMovimiento);
             throw new NotImplementedException();
         }
 
         public List<TipoMovimiento> ListarTodos()
         {
-            // TODO: Completar
+            // TODO: Completar *************esto toque GABY
+            var bc = new TipoMovimientoComponent();
+            return bc.ListarTodos();
             throw new NotImplementedException();
         }
     }
