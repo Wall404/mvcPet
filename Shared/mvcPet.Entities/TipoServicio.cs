@@ -15,5 +15,7 @@ namespace mvcPet.Entities
 
         [DisplayName("Nombre")]
         public string Nombre { get; set; }
+
+        public IEnumerable<Precio> Precios { get; set; }
     }
 }

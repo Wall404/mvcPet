@@ -15,14 +15,29 @@ namespace mvcPet.Services
     {
         public Precio Agregar(Precio precio)
         {
-            var bc = new PrecioComponent();
-            return bc.Agregar(precio);
+            try
+            {
+                var bc = new PrecioComponent();
+                return bc.Agregar(precio);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+            
         }
 
-        public Precio BuscarPorTipoServicio(int tipoServicioId)
+        public Precio BuscarPorId(int id)
         {
-            // TODO
-            throw new NotImplementedException();
+            var bc = new PrecioComponent();
+            return bc.BuscarPorId(id);
+        }
+
+        public List<Precio> BuscarPorTipoServicio(int tipoServicioId)
+        {
+            var bc = new PrecioComponent();
+            return bc.BuscarPorTipoServicio(tipoServicioId);
         }
 
         public Precio Editar(Precio precio)

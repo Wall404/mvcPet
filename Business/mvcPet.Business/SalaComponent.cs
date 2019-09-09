@@ -12,23 +12,50 @@ namespace mvcPet.Business
     {
         public Sala Agregar(Sala sala)
         {
-            // TODO: Completar
-            return null;
+            Sala result = default(Sala);
+            var salaDAC = new SalaDAC();
+            result = salaDAC.Create(sala);
+            return result;
         }
         public Sala Editar(Sala sala)
         {
-            // TODO: Completar
-            return null;
+            Sala result = default(Sala);
+            var salaDAC = new SalaDAC();
+            salaDAC.Update(sala);
+            result = sala;
+            return result;
         }
         public Sala BuscarPorId(int id)
         {
-            // TODO: Completar
-            return null;
+            Sala result = default(Sala);
+            var salaDAC = new SalaDAC();
+            result = salaDAC.ReadBy(id);
+            return result;
         }
         public List<Sala> ListarTodos()
         {
-            // TODO: Completar
-            return null;
+            List<Sala> result = default(List<Sala>);
+            var salaDAC = new SalaDAC();
+            result = salaDAC.Read();
+            return result;
+
+        }
+
+        public Sala Eliminar(int id)
+        {
+            Sala result = default(Sala);
+            var salaDAC = new SalaDAC();
+            try
+            {
+                result = salaDAC.ReadBy(id);
+                salaDAC.Delete(id);
+                return result;
+            }
+            catch (Exception)
+            {
+                return null;
+                throw;
+            }
 
         }
     }

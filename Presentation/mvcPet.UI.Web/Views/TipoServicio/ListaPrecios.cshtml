@@ -1,0 +1,49 @@
+﻿@model mvcPet.Entities.TipoServicio
+
+@{
+    ViewBag.Title = "Precios";
+}
+
+<h2>Precios de @Model.Nombre</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Precio", "NuevoPrecio", new { id = Model.Id })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Precios.FirstOrDefault().FechaDesde)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precios.FirstOrDefault().FechaHasta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precios.FirstOrDefault().Valor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Precios) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaDesde)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaHasta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Volver", "Index")
+</div>

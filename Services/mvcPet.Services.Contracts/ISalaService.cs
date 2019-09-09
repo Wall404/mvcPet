@@ -22,5 +22,8 @@ namespace mvcPet.Services.Contracts
 
         [OperationContract]
         List<Sala> ListarTodos();
+
+        [OperationContract]
+        Sala Eliminar(int id);
     }
 }

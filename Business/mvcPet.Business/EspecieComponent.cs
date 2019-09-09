@@ -24,6 +24,25 @@ namespace mvcPet.Business
             result = especie;
             return result;
         }
+
+        public Especie Eliminar(int id)
+        {
+            Especie result = default(Especie);
+            var especieDAC = new EspecieDAC();
+            try
+            {
+                result = especieDAC.ReadBy(id);
+                especieDAC.Delete(id);
+                return result;
+            }
+            catch (Exception)
+            {
+                return null;
+                throw;
+            }
+            
+        }
+
         public Especie BuscarPorId(int id)
         {
             Especie result = default(Especie);

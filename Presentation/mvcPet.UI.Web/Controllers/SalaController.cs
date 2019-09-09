@@ -1,9 +1,6 @@
-﻿using mvcPet.Services;
+﻿using mvcPet.Entities;
+using mvcPet.Services;
 using mvcPet.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace mvcPet.UI.Web.Controllers
@@ -15,13 +12,22 @@ namespace mvcPet.UI.Web.Controllers
         {
             ISalaService salaService = new SalaService();
             var lista = salaService.ListarTodos();
-            return View();
+            return View(lista);
         }
 
         // GET: Sala/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ISalaService salaService = new SalaService();
+            Sala sala = salaService.BuscarPorId(id);
+            if (sala == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(sala);
+            }
         }
 
         // GET: Sala/Create
@@ -32,12 +38,12 @@ namespace mvcPet.UI.Web.Controllers
 
         // POST: Sala/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Sala model)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                ISalaService salaService = new SalaService();
+                salaService.Agregar(model);
                 return RedirectToAction("Index");
             }
             catch
@@ -49,17 +55,26 @@ namespace mvcPet.UI.Web.Controllers
         // GET: Sala/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ISalaService salaService = new SalaService();
+            Sala e = salaService.BuscarPorId(id);
+            if (e == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(e);
+            }
         }
 
         // POST: Sala/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Sala model)
         {
             try
             {
-                // TODO: Add update logic here
-
+                ISalaService salaService = new SalaService();
+                salaService.Editar(model);
                 return RedirectToAction("Index");
             }
             catch
@@ -71,16 +86,26 @@ namespace mvcPet.UI.Web.Controllers
         // GET: Sala/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            ISalaService salaService = new SalaService();
+            Sala e = salaService.BuscarPorId(id);
+            if (e == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(e);
+            }
         }
 
         // POST: Sala/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirm(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                ISalaService salaService = new SalaService();
+                salaService.Eliminar(id);
 
                 return RedirectToAction("Index");
             }

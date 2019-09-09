@@ -18,7 +18,10 @@ namespace mvcPet.Services.Contracts
         Precio Editar(Precio precio);
 
         [OperationContract]
-        Precio BuscarPorTipoServicio(int tipoServicioId);
+        List<Precio> BuscarPorTipoServicio(int tipoServicioId);
+
+        [OperationContract]
+        Precio BuscarPorId(int id);
 
         [OperationContract]
         List<Precio> ListarTodos();

@@ -20,6 +20,60 @@ namespace mvcPet.UI.Web.Controllers
             return View(lista);
         }
 
+        // GET: TipoServicio/ListaPrecios/5
+        public ActionResult ListaPrecios(int id)
+        {
+            ITipoServicioService tipoServicioService = new TipoServicioService();
+            var tipoServicio = tipoServicioService.BuscarPorId(id);
+
+            IPrecioService precioService = new PrecioService();
+            var precios = precioService.BuscarPorTipoServicio(id);
+
+            tipoServicio.Precios = new List<Precio>(precios);
+
+            return View(tipoServicio);
+        }
+
+        // GET: TipoServicio/NuevoPrecio
+        public ActionResult NuevoPrecio(int id)
+        {
+            try
+            {
+                ITipoServicioService tipoServicioService = new TipoServicioService();
+                var tipoServicio = tipoServicioService.BuscarPorId(id);
+
+                IPrecioService precioService = new PrecioService();
+                var precio = new Precio
+                {
+                    TipoServicioId = id,
+                    TipoServicio = tipoServicio
+                };
+
+                return View(precio);
+            }
+            catch (Exception)
+            {
+                return View();
+                throw;
+            }
+        }
+
+        // POST: TipoServicio/NuevoPrecio
+        [HttpPost]
+        public ActionResult NuevoPrecio(Precio model)
+        {
+            try
+            {
+                IPrecioService precioService = new PrecioService();
+                precioService.Agregar(model);
+                return RedirectToAction("ListaPrecios", new { id = model.TipoServicioId } );
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         // GET: TipoServicio/Details/5
         public ActionResult Details(int id)
         {

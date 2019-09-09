@@ -46,6 +46,16 @@ namespace mvcPet.Data
                 return default(Int16);
         }
 
+        protected static DateTime GetDateTimeValue(IDataReader dr, string columnName)
+        {
+            int i = dr.GetOrdinal(columnName);
+
+            if (!dr.IsDBNull(i))
+                return dr.GetDateTime(i);
+            else
+                return default (DateTime);
+        }
+
         protected string FormatFilterStatement(string filter)
         {
             return Regex.Replace(filter, "^(AND|OR)", string.Empty);
