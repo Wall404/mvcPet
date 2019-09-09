@@ -16,7 +16,7 @@ namespace mvcPet.Entities
         [DisplayName("Nombre")]
         public string Nombre { get; set; }
 
-        [DisplayName("TipoSala")]
+        [DisplayName("Tipo Sala")]
         public string TipoSala { get; set; }
 
     }

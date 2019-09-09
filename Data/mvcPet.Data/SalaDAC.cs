@@ -14,16 +14,25 @@ namespace mvcPet.Data
     {
         public Sala Create(Sala sala)
         {
-            const string SQL_STATEMENT = "INSERT INTO Sala ([Nombre]) VALUES(@Nombre), (@TipoSala); SELECT SCOPE_IDENTITY();";
-
-            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
-            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            try
             {
-                db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, sala.Nombre);
-                db.AddInParameter(cmd, "@TipoSala", DbType.AnsiString, sala.TipoSala);
-                sala.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
+                const string SQL_STATEMENT = "INSERT INTO Sala ([Nombre],[TipoSala]) VALUES(@Nombre, @TipoSala); SELECT SCOPE_IDENTITY();";
+
+                var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+                using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+                {
+                    db.AddInParameter(cmd, "@Nombre", DbType.AnsiString, sala.Nombre);
+                    db.AddInParameter(cmd, "@TipoSala", DbType.AnsiString, sala.TipoSala);
+                    sala.Id = Convert.ToInt32(db.ExecuteScalar(cmd));
+                }
+                return sala;
             }
-            return sala;
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
         public void Delete(int id)
