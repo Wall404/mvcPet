@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Editar Precio";
 }
-
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/themes/base/datepicker.css" rel="stylesheet" />
 <h2>Editar Precio</h2>
 
 @using (Html.BeginForm())
@@ -18,29 +19,26 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.FechaDesde, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="input-daterange input-group" id="datepicker" style="width:280px">
                     @*<input type="text" name="FechaDesde" id="FechaDesde" class="arq-web-input input form-control"/>*@
-                    @Html.EditorFor(model => model.FechaDesde, new { htmlAttributes = new { @class = "form-control", type="text"} })
+                    @Html.EditorFor(model => model.FechaDesde, new { htmlAttributes = new { @class = "form-control datepicker" } })
                     <span class="input-group-addon">hasta</span>
                     @*<input type="text" class="arq-web-input input form-control" name="end" />*@
-                    @Html.EditorFor(model => model.FechaHasta, new { htmlAttributes = new { @class = "form-control" , type="text"} })
+                    @Html.EditorFor(model => model.FechaHasta, new { htmlAttributes = new { @class = "form-control datepicker" } })
                 </div>
-                    @Html.ValidationMessageFor(model => model.FechaDesde, "", new { @class = "text-danger" })
-                    @Html.ValidationMessageFor(model => model.FechaHasta, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-5">
-
+                @Html.ValidationMessageFor(model => model.FechaDesde, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.FechaHasta, "", new { @class = "text-danger" })
             </div>
         </div>
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.FechaHasta, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaHasta, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaHasta, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.FechaHasta, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FechaHasta, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FechaHasta, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -64,38 +62,50 @@
 
 @section Scripts {
 
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
     <script type="text/javascript">
         $(function () {
-            //var dateFormated = moment($('.input-daterange input').val(), 'yyyy/mm/dd').format('dd/mm/yyyy');
-            //console.log($('#datepiker input').val(dateFormated));
-            //$('#datepiker input').val(dateFormated);
-            
-            $('.input-daterange').datepicker({
-                format: "dd/mm/yyyy",
-                language: "es"
-            });
-            
-        });
-
-
-        jQuery(function ($) {
-            $.validator.addMethod('datetime',
+            $.validator.addMethod('date',
                 function (value, element) {
                     if (this.optional(element)) {
                         return true;
                     }
-
-                    var ok = true;
+                    var valid = true;
                     try {
                         $.datepicker.parseDate('dd/mm/yy', value);
                     }
                     catch (err) {
-                        ok = false;
+                        valid = false;
                     }
-                    return ok;
+                    return valid;
                 });
+            $(".datetype").datepicker({ dateFormat: 'dd/mm/yy' });
         });
     </script>
+    <script type="text/javascript">
 
-    @Scripts.Render("~/bundles/jqueryval")
+        $(document).ready(function () {
+            $("#FechaDesde").datepicker({
+
+                dateFormat: "dd/mm/yy",
+                onSelect: function (selected_date) {
+                    var selectedDate = new Date(selected_date);
+                    var endDate = new Date(selectedDate.getTime());
+                    $("#FechaDesde").datepicker("option", "minDate", endDate);
+                }
+            });
+
+            $('#FechaHasta').datepicker({
+                dateFormat: "dd/mm/yy"
+            });
+
+
+        });
+
+
+    </script>
+
+
 }

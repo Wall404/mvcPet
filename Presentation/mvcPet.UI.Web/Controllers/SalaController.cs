@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace mvcPet.UI.Web.Controllers
 {
+    [Authorize]
     public class SalaController : Controller
     {
         // GET: Sala

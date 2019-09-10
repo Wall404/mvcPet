@@ -20,17 +20,14 @@ namespace mvcPet.UI.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/moment.js",
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js",
-                      "~/Scripts/bootstrap-datepicker.min.js",
-                      "~/Scripts/locales/bootstrap-datepicker.es.min.js"
+                      "~/Scripts/respond.js"
+
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-slate.css",
-                      "~/Content/site.css",
-                      "~/Content/bootstrap-datepicker.css"));
+                      "~/Content/site.css"));
         }
     }
 }
