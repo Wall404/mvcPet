@@ -42,8 +42,8 @@ namespace mvcPet.Services
 
         public Precio Editar(Precio precio)
         {
-            // TODO
-            throw new NotImplementedException();
+            var bc = new PrecioComponent();
+            return bc.Editar(precio);
         }
 
         public List<Precio> ListarTodos()

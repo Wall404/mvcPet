@@ -39,6 +39,7 @@ namespace mvcPet.Data
 
         public void Delete(int id)
         {
+            // TODO:
             throw new NotImplementedException();
         }
 
@@ -104,9 +105,20 @@ namespace mvcPet.Data
             return result;
         }
 
-        public void Update(Precio entity)
+        public void Update(Precio precio)
         {
-            throw new NotImplementedException();
+            const string SQL_STATEMENT = "UPDATE Precio SET [TipoServicioId]=@TipoServicioId, [FechaDesde]=@FechaDesde, [FechaHasta]=@FechaHasta, [Valor] = @Valor WHERE [Id]= @Id ";
+
+            var db = DatabaseFactory.CreateDatabase(CONNECTION_NAME);
+            using (DbCommand cmd = db.GetSqlStringCommand(SQL_STATEMENT))
+            {
+                db.AddInParameter(cmd, "@TipoServicioId", DbType.Int32, precio.TipoServicioId);
+                db.AddInParameter(cmd, "@FechaDesde", DbType.Date, precio.FechaDesde);
+                db.AddInParameter(cmd, "@FechaHasta", DbType.Date, precio.FechaHasta);
+                db.AddInParameter(cmd, "@Valor", DbType.Decimal, precio.Valor);
+                db.AddInParameter(cmd, "@Id", DbType.Int32, precio.Id);
+                db.ExecuteNonQuery(cmd);
+            }
         }
 
         private Precio LoadPrecio(IDataReader dr)

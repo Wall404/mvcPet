@@ -60,13 +60,52 @@ namespace mvcPet.UI.Web.Controllers
 
         // POST: TipoServicio/NuevoPrecio
         [HttpPost]
-        public ActionResult NuevoPrecio(Precio model)
+        public ActionResult NuevoPrecio(Precio precio)
         {
             try
             {
                 IPrecioService precioService = new PrecioService();
-                precioService.Agregar(model);
-                return RedirectToAction("ListaPrecios", new { id = model.TipoServicioId } );
+                precioService.Agregar(precio);
+                return RedirectToAction("ListaPrecios", new { id = precio.TipoServicioId } );
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: TipoServicio/EditarPrecio/5
+        public ActionResult EditarPrecio(int? id)
+        {
+
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            IPrecioService precioService = new PrecioService();
+            Precio precio = precioService.BuscarPorId(id.Value);
+
+            if(precio == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(precio);
+            }
+
+        }
+
+        // POST: TipoServicio/EditarPrecio/5
+        [HttpPost]
+        public ActionResult EditarPrecio(Precio precio)
+        {
+            try
+            {
+                IPrecioService precioService = new PrecioService();
+                precioService.Editar(precio);
+                return RedirectToAction("ListaPrecios", new { id = precio.TipoServicioId });
             }
             catch
             {
@@ -77,7 +116,18 @@ namespace mvcPet.UI.Web.Controllers
         // GET: TipoServicio/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ITipoServicioService tipoServicioService = new TipoServicioService();
+            var tipoServicio = tipoServicioService.BuscarPorId(id);
+
+            if(tipoServicio == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(tipoServicio);
+            }
+
         }
 
         // GET: TipoServicio/Create
@@ -105,19 +155,19 @@ namespace mvcPet.UI.Web.Controllers
         // GET: TipoServicio/Edit/5
         public ActionResult Edit(int id)
         {
-            ITipoServicioService tipoServicio = new TipoServicioService();
-            TipoServicio t = tipoServicio.BuscarPorId(id);
-            return View(t);
+            ITipoServicioService tipoServicioService = new TipoServicioService();
+            TipoServicio tipoServicio = tipoServicioService.BuscarPorId(id);
+            return View(tipoServicio);
         }
 
         // POST: TipoServicio/Edit/5
         [HttpPost]
-        public ActionResult Edit(TipoServicio model)
+        public ActionResult Edit(TipoServicio tipoServicio)
         {
             try
             {
                 ITipoServicioService tipoServicioService = new TipoServicioService();
-                tipoServicioService.Editar(model);
+                tipoServicioService.Editar(tipoServicio);
                 return RedirectToAction("Index");
             }
             catch
