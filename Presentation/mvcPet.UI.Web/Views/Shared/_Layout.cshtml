@@ -24,15 +24,8 @@
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     <li>@Html.ActionLink("Sobre Nosotros", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">A.B.M.<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Especies", "Index", "Especies")</li>
-                            <li>@Html.ActionLink("Sala", "Index", "Sala")</li>
-                            <li>@Html.ActionLink("Tipo de Movimiento", "Index", "TipoMovimiento")</li>
-                            <li>@Html.ActionLink("Tipos de Servicios", "Index", "TipoServicio")</li>
-                        </ul>
-                    </li>
+                        @* dropdown *@
+                        @Html.Partial("_MenuPartial")
                 </ul>
                         @Html.Partial("_LoginPartial")
             </div>

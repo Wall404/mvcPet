@@ -355,6 +355,7 @@
     <Content Include="Views\Especies\Details.cshtml" />
     <Content Include="Views\TipoServicio\Details.cshtml" />
     <Content Include="Views\TipoServicio\EditarPrecio.cshtml" />
+    <Content Include="Views\Shared\_MenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
